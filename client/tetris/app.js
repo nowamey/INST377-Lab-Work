@@ -3,19 +3,20 @@ document.addEventListener('DOMContentLoaded',() => {
     let squares = Array.from(document.querySelectorAll('.grid div'))
     const grid = document.querySelector('.grid')
     const ScoreDisplay = document.querySelector('#score')
-    const StartBtn = document.querySelector('#start-button')
+    const startBtn = document.querySelector('#start-button')
     let nextRandom = 0
-
+    let timerId=0
+    let score = 0 
 
     //The Tetrominoes
-    const lTetromino = [
+      const lTetromino = [
         [1, width+1, width*2+1, 2],
         [width, width+1, width+2, width*2+2],
         [1, width+1, width*2+1, width*2],
         [width, width*2, width*2+1, width*2+2]
       ]
     
-      const zTetromino = [
+    const zTetromino = [
         [0,width,width+1,width*2+1],
         [width+1, width+2,width*2,width*2+1],
         [0,width,width+1,width*2+1],
@@ -66,7 +67,7 @@ document.addEventListener('DOMContentLoaded',() => {
       }
 
       //make the tetromino move down every second
-      timerId = setInterval(moveDown,1000)
+      //timerId = setInterval(moveDown,1000)
 
       //assign functions to keyCodes
       function control(e){
@@ -101,7 +102,7 @@ document.addEventListener('DOMContentLoaded',() => {
             currentPosition = 4
             draw()
             displayShape()
-
+            addScore()
         }
       }
 
@@ -164,5 +165,31 @@ document.addEventListener('DOMContentLoaded',() => {
         upNextTetrominoes[nextRandom].forEach(index =>{
           displaySquares[displayIndex+index].classList.add('tetromino')
         })
+      }
+      startBtn.addEventListener('click', ()=> {
+        if(timerId){
+          clearInterval(timerId)
+          timerId = null
+        }else{
+          draw()
+          timerId = setInterval(moveDown,1000)
+          nextRandom = Math.floor(Math.random()*theTetrominoes.length)
+          displayShape()
+        }
+      })
+      
+      function addScore(){
+        for(let i =0;i<199;i+=width){
+          const row = [i,i+1,i+2,i+3,i+4,i+5,i+6,i+7,i+8,i+9]
+
+          if(row.every(index => squares[index].classList.contains('taken')))
+          score+=10
+          ScoreDisplay.innerHTML = score
+          row.forEach(index => {
+            squares[index].classList.remove('taken')
+          })
+          const squaresRemoved = squares.splice(i,width)
+          console.log(squares)
+        }
       }
 })
