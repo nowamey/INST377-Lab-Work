@@ -3,3 +3,57 @@
     - The styles in this folder's `style.css`
     - The script in script.js, which should be included via a `<script src="script.js" >` call before your closing </body> tag 
 -->
+<html lang="en">
+<head>
+   <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Noah Ramey's Labs For INST377</title>
+</head>
+<body class = "wrapper">
+  <header class = "header h1"><h1>Noah Ramey's Labs For INST377</header>
+  <div class = "container">
+    <div class = "box left_section">
+      <header class = "header h2"><h2>Album Names</header>
+        <ol class ="box">
+          <li>Daft Punk - Discovery</li>
+          <li>Porter Robinson - Nurture</li>
+          <li>Nujabes - Modal Soul</li>
+          <li>Jai Paul - Leak 04-13 (Bait Ones)</li>
+          <li>The Weeknd - After Hours</li>
+        </ol>
+    </div>
+    <div class = "right_section box ">
+      <header class = "subtitle header h2 "><h2>Image Carousel</header>
+      <div class="carousel">
+        <button class = "prev">prev</button>
+
+          <div class = "slides">
+            <div class ="carousel_item visible">
+                <img id ="slide_1" src="images/discovery.png" alt="gif">
+            </div>
+            <div class ="carousel_item hidden">
+                <img id="slide_2" src="images/modalsoul.jpg" alt="jpg">
+            </div>
+            <div class ="carousel_item hidden">
+                <img id = "slide_3" src="images/baitones.jpg" alt="png">
+            </div>
+            <div class ="carousel_item hidden">
+                <img id ="slide_4" src="images/nurture.jpg" alt="svg">
+            </div>
+          </div>
+        <button class ="next">next</button>
+      </div>
+      <div>
+        <p class = "box">Some of the artwork to my favorite albums!</p>
+      </div>
+    </div>
+  
+
+
+  </div>
+  <footer class = "footer">Github:nowamey <a href="https://github.com/nowamey">https://github.com/nowamey</a></footer>
+  <script src="script.js" charset= "utf-8"></script>
+</body>
+</html>
