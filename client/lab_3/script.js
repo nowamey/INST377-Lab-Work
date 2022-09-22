@@ -76,3 +76,4 @@ document.querySelector('.prev')
     console.log('clicked prev');
     moveToPrevSlide();
   });
+
