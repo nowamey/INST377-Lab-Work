@@ -1,12 +1,12 @@
-document.addEventListener('DOMContentLoaded',() => {
-    const width = 10
-    let squares = Array.from(document.querySelectorAll('.grid div'))
-    const grid = document.querySelector('.grid')
-    const ScoreDisplay = document.querySelector('#score')
-    const startBtn = document.querySelector('#start-button')
-    let nextRandom = 0
-    let timerId=0
-    let score = 0 
+document.addEventListener('DOMContentLoaded', () => {
+  const grid = document.querySelector('.grid')
+  let squares = Array.from(document.querySelectorAll('.grid div'))
+  const scoreDisplay = document.querySelector('#score')
+  const startBtn = document.querySelector('#start-button')
+  const width = 10
+  let nextRandom = 0
+  let timerId
+  let score = 0
 
     //The Tetrominoes
       const lTetromino = [
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded',() => {
       let currentPosition = 4
       let currentRotation = 0
       let random = Math.floor(Math.random()*theTetrominoes.length)
-      let current = theTetrominoes[random][0]
+      let current = theTetrominoes[random][currentRotation]
     
 
       //draw the tetromino
@@ -103,6 +103,7 @@ document.addEventListener('DOMContentLoaded',() => {
             draw()
             displayShape()
             addScore()
+            gameOver()
         }
       }
 
@@ -187,9 +188,17 @@ document.addEventListener('DOMContentLoaded',() => {
           ScoreDisplay.innerHTML = score
           row.forEach(index => {
             squares[index].classList.remove('taken')
+            squares[index].classList.remove('tetromino')
           })
           const squaresRemoved = squares.splice(i,width)
-          console.log(squares)
+          squares =squaresRemoved.concat(squares)
+          squares.forEach(cell => grid.appendChild(cell))
+        }
+      }
+      function gameOver(){
+        if(current.some(index=> squares[currentPosition+index].classList.contains('taken'))){
+          scoreDisplay.innerHTML = 'end'
+          clearInterval(timerId)
         }
       }
 })
