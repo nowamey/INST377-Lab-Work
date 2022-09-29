@@ -229,14 +229,14 @@ form input {
       align-items: flex-start;
       display: flex;
       flex-direction: column;
-      width: 400px;
+      
     }
     .left_section {
     
       flex: 0 1 auto;
       margin: 1rem;
       padding-top: 1.5rem;
-      width: 400px;
+      
     }
    
 }
