@@ -44,6 +44,7 @@ function getRandomIntInclusive(min, max) {
   */
   }
   
+  
   function processRestaurants(list) {
     console.log('fired restaurants list');
     const range = [...Array(15).keys()]
@@ -53,7 +54,16 @@ function getRandomIntInclusive(min, max) {
       return list[index];
     })
     return newArray;
-  
+    }
+    function filterList(list,filterValue){
+        return list.filter((item)=>{
+            if (!item.name){return}
+            const lowerCaseName = item.name.toLowerCase();
+            const lowerCaseQuery = filterValue.toLowerCase();
+            return lowerCaseName.includes(lowerCaseQuery);
+        });
+    }
+
     /*
       ## Process Data Separately From Injecting It
         This function should accept your 1,000 records
@@ -72,7 +82,7 @@ function getRandomIntInclusive(min, max) {
       - Return only their name, category, and location
       - Return the new list of 15 restaurants so we can work on it separately in the HTML injector
     */
-  }
+  
   
   async function mainEvent() {
     /*
@@ -119,16 +129,25 @@ function getRandomIntInclusive(min, max) {
       loadAnimation.classList.add('lds-ellipsis_hidden');
       // And here's an eventListener! It's listening for a "submit" button specifically being clicked
       // this is a synchronous event event, because we already did our async request above, and waited for it to resolve
+    
+        let currentList = []
+
+        form.addEventListener('input',(event)=>{
+            console.log(event.target.value);
+            const filteredList = filterList(currentList,event.target.value);
+            injectHTML(filteredList);
+        })
+
       form.addEventListener('submit', (submitEvent) => {
         // This is needed to stop our page from changing to a new URL even though it heard a GET request
         submitEvent.preventDefault();
   
         // This constant will have the value of your 15-restaurant collection when it processes
-        const restaurantList = processRestaurants(arrayFromJson.data);
+        currentList= processRestaurants(arrayFromJson.data);
        
   
         // And this function call will perform the "side effect" of injecting the HTML list for you
-        injectHTML(restaurantList);
+        injectHTML(currentList);
   
         // By separating the functions, we open the possibility of regenerating the list
         // without having to retrieve fresh data every time
