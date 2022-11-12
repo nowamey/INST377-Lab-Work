@@ -244,7 +244,16 @@ form input {
     }
    
   }
-  
+  /*Map Styles*/
+  #map {
+    display: block;
+    width: 400px; 
+    height: 380px;
+    margin-bottom: 1rem; 
+    border: 2px dashed black;
+    }
+
+
   .lds-ellipsis {
       display: inline-block;
       position: relative;
