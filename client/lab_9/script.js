@@ -220,7 +220,8 @@ async function mainEvent() {
       console.log(event.target.value);
       const filteredList = filterList(currentList, event.target.value);
       injectHTML(filteredList);
-      markerPlace(filteredList, pageMap);
+      changeChart(myChart,shapeDataForLineChart(filteredList));
+      //markerPlace(filteredList, pageMap);
     });
 
     form.addEventListener('submit', (submitEvent) => {
